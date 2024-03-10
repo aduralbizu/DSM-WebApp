@@ -3,7 +3,7 @@
 const Home = () => {
     return (
         <>
-        <h1>Aqui deberia ir pagina principal</h1>
+        <h1>Bienvenido a nombre de la empresa</h1>
         </>
     )
 }

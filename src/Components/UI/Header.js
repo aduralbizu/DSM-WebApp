@@ -8,6 +8,7 @@ const Header = () => {
         <Nav>
         <Nav.Item>
         <Link to='/'>Inicio</Link>
+        <Link to='/product-list'>| Lista de productos</Link>
         </Nav.Item>
 
         </Nav>
