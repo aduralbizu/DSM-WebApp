@@ -33,21 +33,42 @@ function App() {
     ]
   )
 
+  // Estado del carrito de compras
   const [cart, setCart] = useState([]);
 
-  // Función para agregar un producto al carrito
   const addToCart = (productId) => {
-    // Buscar el producto en la lista de productos
-    const product = products.find(product => product.id === productId); // productId: es del producto concreto en Product.js
-    // Agregar el producto al carrito
-    setCart([...cart, product]);
+
+    const productToAdd = products.find(product => product.id === productId); //devuelve primer elto encontrado
+    const productInCart = cart.find(item => item.id === productId);
+
+    // Si el producto ya está en el carrito, incrementar su cantidad
+    if (productInCart) { // En js if, no solo acepta valores booleanos (tambien thruthy, falsy)
+      const updatedCart = cart.map(item => {
+        if (item.id === productId) {
+          return { ...item, quantity: item.quantity + 1 }; //En js en notacion shallow copy, el primer elto entre llaves siempre copia del objeto, y el segundo propiedad
+        }
+        return item;
+      });
+      setCart(updatedCart);
+    } else { // Si el producto no está en el carrito, agregarlo con cantidad 1
+      setCart([...cart, { ...productToAdd, quantity: 1 }]);
+    }
   };
 
   // Función para quitar un producto del carrito
   const removeFromCart = (productId) => {
-    // Filtrar el carrito para eliminar el producto con el ID especificado
-    const updatedCart = cart.filter(item => item.id !== productId);
-    // Actualizar el estado del carrito
+    const updatedCart = cart.map(item => {
+      if (item.id === productId) {
+        if (item.quantity === 1) {
+
+          return null;
+        } else {
+
+          return { ...item, quantity: item.quantity - 1 };
+        }
+      }
+      return item;
+    }).filter(item => item !== null); // Se queda con los distintos
     setCart(updatedCart);
   };
 
