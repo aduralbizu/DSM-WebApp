@@ -1,0 +1,9 @@
+.panel-carrito {
+    position: absolute;
+    top: 50px; /* Ajusta la posición según tu diseño */
+    right: 10px; /* Ajusta la posición según tu diseño */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 999; /* Asegúrate de que el panel esté por encima del resto del contenido */
+}

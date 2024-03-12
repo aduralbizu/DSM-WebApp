@@ -5,14 +5,16 @@ const Products = (props) => {
 
     //Aquí un filtrado
     
+    // const addTocart = props.addToCart();
     let contenido = <Alert variant="primary">No hay productos</Alert>; //Contenido condicional. Lo presentaremos en pantalla
 
     if (props.products.length > 0) {
         contenido = <div>
             {
+               
                 props.products.map((element) => { // La expresión props.productos.map(...) en JavaScript generalmente se usa para iterar sobre cada elemento de un array. Ejecuta la función que se le pasa como argumento para cada elemento del array
                     return (
-                        <Product key = {element.id} product={element} />
+                        <Product key = {element.id} product={element} addToCart={props.addToCart} removeFromCart={props.removeFromCart}/> 
                     )
                 })
             }
