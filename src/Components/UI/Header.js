@@ -13,7 +13,7 @@ const Header = (props) => {
 
     return (
         <>
-            <Nav>
+            <Nav> 
                 <Nav.Item>
                     <Link to='/'>Inicio</Link>
                     <Link to='/product-list'>| Lista de productos</Link>
