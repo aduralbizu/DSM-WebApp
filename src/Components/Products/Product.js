@@ -13,42 +13,7 @@ const Product = (props) => {
     const image = props.product.image;
 
     const id_producto = props.product.id;
-    // props.addToCart;
-    // props.removeFromCart;
-
-
-    // const agregarCarrito = () => {
-
-    //     let productoEncontrado = false;
-
-    //     for (let i = 0; i < chart.length; i++) {
-    //         if (chart[i].id_producto === id_producto) {
-
-    //             chart[i].cantidad += 1;
-    //             productoEncontrado = true;
-    //             break; // Salimos del bucle ya que encontramos el producto
-    //         }
-    //     }
-
-    //     if (!productoEncontrado) {
-            
-    //         setChart(
-    //             {
-    //                 id: id_producto,
-    //                 nombre: name,
-    //                 cantidad: 1
-
-    //             }
-    //         )
-        
-    //     }
-
-    //     //  setChart((prevChart) => {
-    //     //      return [chart, ...prevChart]; // crea indice nuevo: [0], [1] del json
-    //     //  })
-    //     console.log(chart);
-
-    // }
+   
 
 
     return (
