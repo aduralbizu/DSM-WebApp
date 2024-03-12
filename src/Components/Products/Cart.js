@@ -1,3 +1,6 @@
+import React, { useContext } from 'react';
+import CartContext from '../../Contexts/CartContext';
+import { Button } from 'react-bootstrap';
 
 const Cart = ({ cart }) => {
 
@@ -5,11 +8,16 @@ const Cart = ({ cart }) => {
     let total = 0;
 
     cart.forEach(item => {
-
       total += item.price * item.quantity;
     });
     return total;
   };
+
+  const cartContext = useContext(CartContext);
+
+  const clearCartHandler = () => {
+    cartContext.clearCart();
+}
 
   return (
     <div>
@@ -22,6 +30,7 @@ const Cart = ({ cart }) => {
         ))}
       </ul>
       <p>Total: {calculateTotal()} €</p>
+      <Button onClick={ clearCartHandler }>Vaciar Carrito</Button>
     </div>
   );
 };

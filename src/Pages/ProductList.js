@@ -1,16 +1,13 @@
 import Products from "../Components/Products/Products";
 
 // {} equivale a props.addCart ...
-const ProductList = ({ products, addToCart, removeFromCart }) =>{
-    
-    
+const ProductList = ({ products }) => {
+
+
 
     return (
         <>
-        <Products products={products}
-            addToCart={addToCart}
-            removeFromCart={removeFromCart}
-        />
+            <Products products={products} />
         </>
     )
 }

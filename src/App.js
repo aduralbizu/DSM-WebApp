@@ -6,6 +6,7 @@ import Footer from './Components/UI/Footer';
 import ProductList from './Pages/ProductList';
 import ErrorPage from './Pages/ErrorPage';
 import { useState } from 'react';
+import CartContext from './Contexts/CartContext';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
   // Estado del carrito de compras
   const [cart, setCart] = useState([]);
 
+
   const addToCart = (productId) => {
 
     const productToAdd = products.find(product => product.id === productId); //devuelve primer elto encontrado
@@ -55,7 +57,6 @@ function App() {
     }
   };
 
-  // Función para quitar un producto del carrito
   const removeFromCart = (productId) => {
     const updatedCart = cart.map(item => {
       if (item.id === productId) {
@@ -72,27 +73,35 @@ function App() {
     setCart(updatedCart);
   };
 
+  const clearCart = () => {
+    setCart([]);
+};
+
+
+
   return (
     <>
-      <Header cart={cart}/>
+      <CartContext.Provider value={{ addToCart:addToCart, removeFromCart:removeFromCart, clearCart:clearCart }}>
 
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/product-list'
-          element={<ProductList
-            products={products}
-            addToCart={addToCart}
-            removeFromCart={removeFromCart} />
-          }
+        <Header cart={cart} />
 
-        />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/product-list'
+            element={<ProductList
+              products={products}
+               />
+            }
 
-        <Route path='*' element={<ErrorPage />} />
-      </Routes>
+          />
 
-    
+          <Route path='*' element={<ErrorPage />} />
+        </Routes>
 
-      <Footer />
+
+
+        <Footer />
+      </CartContext.Provider >
 
     </>
 
