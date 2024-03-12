@@ -1,0 +1,8 @@
+.producto{
+    border: 1px solid rgb(150, 136, 136); 
+    border-radius: 15px;
+}
+
+.nombreProducto{
+    overflow-wrap: break-word;
+}

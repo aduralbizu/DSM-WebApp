@@ -29,7 +29,42 @@ function App() {
         name: 'Botella 1L AOVE',
         price: 4,
         image: 'imagen3'
+      },{
+        id: Math.random().toString(),
+        name: 'Galletas',
+        price: 2.25,
+        image: 'imagen1'
+      },
+      {
+        id: Math.random().toString(),
+        name: 'Cerveza',
+        price: 1,
+        image: 'imagen2'
+      },
+      {
+        id: Math.random().toString(),
+        name: 'Agua mineral',
+        price: 1,
+        image: 'imagen3'
+      },{
+        id: Math.random().toString(),
+        name: 'Zumo de naranja',
+        price: 1.15,
+        image: 'imagen1'
+      },
+      {
+        id: Math.random().toString(),
+        name: 'Chocolate',
+        price: 0.15,
+        image: 'imagen2'
+      },
+      {
+        id: Math.random().toString(),
+        name: 'Queso Idiazabal',
+        price: 4,
+        image: 'imagen3'
       }
+      
     ]
   )
 
