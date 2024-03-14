@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import CartContext from "../../Contexts/CartContext";
+import "./Product.css";
 
 // cuando se usa setChart, es cuando se renderiza de nuevo comp producto
 // si actuas directamente sobre var chart, parece que cambia tambien, pero no renderiza
@@ -27,8 +28,8 @@ const Product = (props) => {
 
   
     return (
-        <div className='producto m-4 p-2' >
-            <h2>{name}</h2>
+        <div className='producto pb-3 pt-3' >
+            <h3 className="nombreProducto">{name}</h3>
             <p>{image}</p>
             <p>{price} €</p>
           
