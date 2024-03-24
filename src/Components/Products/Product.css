@@ -6,3 +6,8 @@
 .nombreProducto{
     overflow-wrap: break-word;
 }
+
+.precioDetalles{
+    font-style: italic;
+    display: inline;
+}
