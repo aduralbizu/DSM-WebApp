@@ -12,7 +12,7 @@ import CartContext from './Contexts/CartContext';
 function App() {
 
   const [products, setProductos] = useState(
-    [
+    [ 
       {
         id: Math.random().toString(),
         name: 'Lays',
