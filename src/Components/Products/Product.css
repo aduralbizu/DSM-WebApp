@@ -7,7 +7,18 @@
     overflow-wrap: break-word;
 }
 
+.imagen{
+    width:150px;
+    height:150px;
+}
+
+.precio{
+    font-size: 1.15rem;
+    font-family: arial;
+    font-weight: lighter;
+}
 .precioDetalles{
     font-style: italic;
     display: inline;
 }
+

@@ -17,61 +17,61 @@ function App() {
         id: Math.random().toString(),
         name: 'Lays',
         price: 1,
-        image: 'imagen1',
+        image: '../../../../Images/lays.jpg',
         details: "Las patatas más crujientes del mercado, ahora a un precio mejor."
       },
       {
         id: Math.random().toString(),
-        name: 'Manzana',
+        name: 'Manzanas',
         price: 0.15,
-        image: 'imagen2',
+        image: '../../../../Images/manzanas.webp',
         details: "Estas manzanas son tan sanas que mantendrán al médico alejado."
       },
       {
         id: Math.random().toString(),
         name: 'Botella 1L AOVE',
         price: 4,
-        image: 'imagen3',
+        image: '../../../../Images/aceite.png', 
         details: "El único aceite de oliva virgen extra que no se vende a 8€ el litro."
       }, {
         id: Math.random().toString(),
         name: 'Galletas',
         price: 2.25,
-        image: 'imagen1',
+        image: '../../../../Images/galletas.jpg',
         details: "Galletas sin chocolate, para tomar con el desayuno, comida o merienda."
       },
       {
         id: Math.random().toString(),
         name: 'Cerveza',
         price: 1,
-        image: 'imagen2',
+        image: '../../../../Images/cerveza.jpg',
         details: "Cerveza rubia Pilsen. De origen 100% local. "
       },
       {
         id: Math.random().toString(),
         name: 'Agua mineral',
         price: 1,
-        image: 'imagen3',
+        image: '../../../../Images/agua.jpg',
         details: "Agua de mineralización muy débil, de los manantiales de la meseta."
       }, {
         id: Math.random().toString(),
         name: 'Zumo de naranja',
         price: 1.15,
-        image: 'imagen1',
+        image: '../../../../Images/zumo.jpg',
         details: "Zumo de naranjas de valencia sin pulpa. Cero azucares o edulcorantes añadidos."
       },
       {
         id: Math.random().toString(),
         name: 'Chocolate',
         price: 0.15,
-        image: 'imagen2',
+        image: '../../../../Images/chocolate.jpg',
         details: "Chocolate 70%, de origen sostenible. Cero azucares añadidos."
       },
       {
         id: Math.random().toString(),
         name: 'Queso Idiazabal',
         price: 4,
-        image: 'imagen3',
+        image: '../../../../Images/gazta.jpg',
         details: "El mejor queso de Navarra, kilometro 0. Nafarroako gaztarik hoberena, bertakoa."
       }
 

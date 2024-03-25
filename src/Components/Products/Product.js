@@ -1,7 +1,7 @@
 // (nombre+imagen+€)
 import { useState } from 'react';
 import { useContext } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Image } from "react-bootstrap";
 import CartContext from "../../Contexts/CartContext";
 import Modal from 'react-bootstrap/Modal';
 import "./Product.css";
@@ -34,9 +34,8 @@ const Product = (props) => {
     return (
         <div className='producto pb-3 pt-3' >
             <h3 className="nombreProducto">{name}</h3>
-            <p>{image}</p>
-            <p>{price} €</p>
-
+            <Image className="imagen mb-3 mt-3 img-fluid" src={image} rounded />
+            <p className='precio'>{price} €</p>
             <Container>
                 <Button variant="outline-success" className="m-1" onClick={addToCartHandler}>+</Button>
                 <Button variant="outline-danger" className="m-1" onClick={removeFromCartHandler}> - </Button>
