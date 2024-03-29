@@ -1,82 +1,62 @@
-import { useState, useRef, useEffect } from "react";
-import { Badge, Nav } from "react-bootstrap";
+import React, { useState } from "react";
+import { Badge, Nav, Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import '../Products/Cart.css';
 import Cart from "../Products/Cart";
-import './Header.css';
+import "./Header.css";
 
 const Header = (props) => {
-    const [mostrarCarrito, setMostrarCarrito] = useState(false);
-    const [bloquearClics, setBloquearClics] = useState(false);
-    const cartRef = useRef(null);
+  const [showModal, setShowModal] = useState(false);
 
-    const toggleCarrito = () => {
-        setMostrarCarrito(!mostrarCarrito);
-    }
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (cartRef.current && !cartRef.current.contains(event.target)) {
-                if (mostrarCarrito) {
-                    setMostrarCarrito(false);
-                    setBloquearClics(false); // Restaurar la capacidad de clics
-                }
-            }
-        };
+  const calculateUds = () => {
+    let uds = 0;
+    props.cart.forEach((item) => {
+      uds += item.quantity;
+    });
+    return uds;
+  };
 
-        document.addEventListener("mousedown", handleClickOutside);
+  return (
+    <>
+      <div className="header">
+        <Link to="/" className="header-logo">
+          Mi Tienda Online
+        </Link>
+        <Nav className="header-links">
+          <Nav.Item as="li">
+            <Link to="/">Inicio |</Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/product-list">Lista de productos</Link>
+          </Nav.Item>
+        </Nav>
+        <Nav className="justify-content-end">
+          <Nav.Item>
+            <Nav.Link onClick={handleToggleModal} style={{ marginRight: "10px" }}>
+              🛒 Carrito <Badge variant="primary">{calculateUds()}</Badge>
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </div>
 
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [mostrarCarrito]);
-
- 
-
-    const calculateUds = () => {
-        let uds = 0;
-
-        props.cart.forEach(item => {
-            uds += item.quantity;
-        });
-        return uds;
-    };
-
-    return (
-        <>
-            <div className="header">
-            <Link to='/' className="header-logo">Mi Tienda Online</Link>
-                <Nav className="header-links">
-                    <Nav.Item as="li">
-                        <Link to='/'>Inicio |</Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Link to='/product-list'>Lista de productos</Link>
-                    </Nav.Item>
-                </Nav>
-                <Nav className="justify-content-end">
-                    <Nav.Item>
-                        <Nav.Link onClick={toggleCarrito}  style={{ marginRight: '10px' }}>
-                            🛒 Carrito <Badge variant="primary">{calculateUds()}</Badge>
-                        </Nav.Link>
-                    </Nav.Item>
-                </Nav>
-            </div>
-
-            {/* Mostrar el panel del carrito si mostrarCarrito es true */}
-            {mostrarCarrito &&
-                <div className="panel-carrito" ref={cartRef}>
-                    <Cart cart={props.cart} />
-                </div>
-            }
-
-            {bloquearClics && (
-                <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 9999 }}></div>
-            )}
-        </>
-    )
-}
-
+      <Modal show={showModal} onHide={handleToggleModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cesta</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Cart cart={props.cart} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleToggleModal}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 
 export default Header;
-
