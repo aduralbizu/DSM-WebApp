@@ -10,14 +10,16 @@ const Cart = ({ cart }) => {
     cart.forEach(item => {
       total += item.price * item.quantity;
     });
-    return total;
+    return total.toFixed(2);
   };
+
+
 
   const cartContext = useContext(CartContext);
 
   const clearCartHandler = () => {
     cartContext.clearCart();
-}
+  }
 
   return (
     <div>
@@ -30,7 +32,7 @@ const Cart = ({ cart }) => {
         ))}
       </ul>
       <p>Total: {calculateTotal()} €</p>
-      <Button onClick={ clearCartHandler }>Vaciar Carrito</Button>
+      <Button onClick={clearCartHandler}>Vaciar Carrito</Button>
     </div>
   );
 };
