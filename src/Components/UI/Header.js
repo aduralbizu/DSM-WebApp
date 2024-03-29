@@ -45,7 +45,8 @@ const Header = (props) => {
     return (
         <>
             <div className="header">
-                <Nav className="justify-content-start">
+            <Link to='/' className="header-logo">Mi Tienda Online</Link>
+                <Nav className="header-links">
                     <Nav.Item as="li">
                         <Link to='/'>Inicio |</Link>
                     </Nav.Item>

@@ -1,8 +1,44 @@
 .header {
-    padding: 0.5rem;
-    margin: 1rem 0;
-    border-radius: 12px;
-    background-color: #860000;
-    text-align: center;
-    color: aliceblue;
+    padding: 1rem;
+    margin: 0;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.header-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.header-links li {
+    margin-right: 1rem;
+}
+
+.header-links li:last-child {
+    margin-right: 0;
+}
+
+/* puede que haya eltos <a> internos */
+/*cuando se cambia color, dado por la de abajo*/
+.header-links a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+
+.header-links a:hover {
+    color: #860000;
 }
