@@ -10,7 +10,7 @@ const Home = () => {
                 <h1>¡Bienvenido!</h1>
                 <h4 className='textHome'>Disponga de los mejores productos al mejor precio.</h4>
             </Container>
-            <Container>
+            <Container className='mb-3'>
                 <Carousel>
                     <Carousel.Item>
                         <Image className='imagenCarousel' alt='primera' src='fsdfds../../../../Images/supermarket.jpg'></Image>

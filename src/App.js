@@ -3,83 +3,39 @@ import './App.css';
 import Header from './Components/UI/Header';
 import Home from './Pages/Home';
 import Footer from './Components/UI/Footer';
-import ProductList from './Pages/ProductList';
 import ErrorPage from './Pages/ErrorPage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CartContext from './Contexts/CartContext';
+import Products from './Components/Products/Products';
+import axios from 'axios';
 
 
 function App() {
 
-  const [products, setProductos] = useState(
-    [
-      {
-        id: Math.random().toString(),
-        name: 'Lays',
-        price: 1,
-        image: '../../../../Images/lays.jpg',
-        details: "Las patatas más crujientes del mercado, ahora a un precio mejor."
-      },
-      {
-        id: Math.random().toString(),
-        name: 'Manzanas',
-        price: 0.15,
-        image: '../../../../Images/manzanas.webp',
-        details: "Estas manzanas son tan sanas que mantendrán al médico alejado."
-      },
-      {
-        id: Math.random().toString(),
-        name: 'Botella 1L AOVE',
-        price: 4,
-        image: '../../../../Images/aceite.png', 
-        details: "El único aceite de oliva virgen extra que no se vende a 8€ el litro."
-      }, {
-        id: Math.random().toString(),
-        name: 'Galletas',
-        price: 2.25,
-        image: '../../../../Images/galletas.jpg',
-        details: "Galletas sin chocolate, para tomar con el desayuno, comida o merienda."
-      },
-      {
-        id: Math.random().toString(),
-        name: 'Cerveza',
-        price: 1,
-        image: '../../../../Images/cerveza.jpg',
-        details: "Cerveza rubia Pilsen. De origen 100% local. "
-      },
-      {
-        id: Math.random().toString(),
-        name: 'Agua mineral',
-        price: 1,
-        image: '../../../../Images/agua.jpg',
-        details: "Agua de mineralización muy débil, de los manantiales de la meseta."
-      }, {
-        id: Math.random().toString(),
-        name: 'Zumo de naranja',
-        price: 1.15,
-        image: '../../../../Images/zumo.jpg',
-        details: "Zumo de naranjas de valencia sin pulpa. Cero azucares o edulcorantes añadidos."
-      },
-      {
-        id: Math.random().toString(),
-        name: 'Chocolate',
-        price: 0.15,
-        image: '../../../../Images/chocolate.jpg',
-        details: "Chocolate 70%, de origen sostenible. Cero azucares añadidos."
-      },
-      {
-        id: Math.random().toString(),
-        name: 'Queso Idiazabal',
-        price: 4,
-        image: '../../../../Images/gazta.jpg',
-        details: "El mejor queso de Navarra, kilometro 0. Nafarroako gaztarik hoberena, bertakoa."
-      }
-
-    ]
-  )
+  const [products, setProducts] = useState([]);
 
   // Estado del carrito de compras
   const [cart, setCart] = useState([]);
+
+  useEffect(() => { //Es necesario hacer un GET/ de todos los productos para añadir producto al carrito
+    axios.get('https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/products.json')
+      .then((response) => {
+        // console.log(response.data);
+        let arrayProductos = [];
+        for (let key in response.data) {
+          arrayProductos.push({
+            id: key,
+            name: response.data[key].name,
+            price: response.data[key].price,
+            image: response.data[key].image,
+            details: response.data[key].details
+          })
+        }
+        setProducts(arrayProductos);
+      }).catch((error) => {
+        alert("Se ha producido un error");
+      })
+  }, []); //Dependencia array vacío para que solo se ejecute una vez
 
 
   const addToCart = (productId) => {
@@ -122,31 +78,19 @@ function App() {
   };
 
 
-
   return (
     <>
       <CartContext.Provider value={{ addToCart: addToCart, removeFromCart: removeFromCart, clearCart: clearCart }}>
-
         <Header cart={cart} />
 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/product-list'
-            element={<ProductList
-              products={products}
-            />
-            }
-
-          />
-
+          <Route path='/product-list' element={<Products products={products} />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
 
-
-
         <Footer />
       </CartContext.Provider >
-
     </>
 
   );
