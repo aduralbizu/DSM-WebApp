@@ -7,6 +7,13 @@ import ProductList from './Pages/ProductList';
 import ErrorPage from './Pages/ErrorPage';
 import { useState } from 'react';
 import CartContext from './Contexts/CartContext';
+import Checkout from './Pages/Checkout';
+import CheckoutForm from './Pages/CheckoutForm';
+import Contact from './Pages/Contact';
+import AboutUs from './Pages/AboutUs';
+import OrderHistory from './Pages/OrderHistory';
+
+
 
 
 function App() {
@@ -31,7 +38,7 @@ function App() {
         id: Math.random().toString(),
         name: 'Botella 1L AOVE',
         price: 4,
-        image: '../../../../Images/aceite.png', 
+        image: '../../../../Images/aceite.png',
         details: "El único aceite de oliva virgen extra que no se vende a 8€ el litro."
       }, {
         id: Math.random().toString(),
@@ -77,6 +84,7 @@ function App() {
 
     ]
   )
+ 
 
   // Estado del carrito de compras
   const [cart, setCart] = useState([]);
@@ -97,7 +105,8 @@ function App() {
       });
       setCart(updatedCart);
     } else { // Si el producto no está en el carrito, agregarlo con cantidad 1
-      setCart([...cart, { ...productToAdd, quantity: 1 }]);
+      setCart([...cart, { ...productToAdd, quantity: 1, image: productToAdd.image }]);
+      //setCart([...cart, { ...productToAdd, quantity: 1 }]);
     }
   };
 
@@ -136,13 +145,24 @@ function App() {
               products={products}
             />
             }
+          />
+          <Route path='/resumen-pedido'
+            element={<Checkout
+              cart={cart}
+            />
+            }
+          />
 
+          <Route path='/info-pedido'
+            element={<CheckoutForm />}
           />
 
           <Route path='*' element={<ErrorPage />} />
+
+          <Route path='/about-us' element={<AboutUs />}/>
+          <Route path='/contact' element={<Contact />}/>
+          <Route path='/order-history' element={<OrderHistory />} />
         </Routes>
-
-
 
         <Footer />
       </CartContext.Provider >

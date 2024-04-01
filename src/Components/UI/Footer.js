@@ -6,10 +6,10 @@ const Footer = () => {
     return (
         <footer className="footer">
             <ul className="footer-links">
-                <li><Link to='/about'>Sobre nosotros</Link></li>
+                <li><Link to='/about-us'>Sobre nosotros</Link></li>
                 <li><Link to='/contact'>Contacto</Link></li>
             </ul>
-            <p>&copy; 2024 Mi Tienda Online</p>
+            <p>&copy; 2024 Abelki</p>
         </footer>
     );
 }

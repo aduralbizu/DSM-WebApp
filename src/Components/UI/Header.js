@@ -23,14 +23,17 @@ const Header = (props) => {
     <>
       <div className="header">
         <Link to="/" className="header-logo">
-          Mi Tienda Online
+          Abelki
         </Link>
         <Nav className="header-links">
           <Nav.Item as="li">
             <Link to="/">Inicio |</Link>
           </Nav.Item>
-          <Nav.Item>
-            <Link to="/product-list">Lista de productos</Link>
+          <Nav.Item as="li">
+            <Link to="/product-list">Lista de productos |</Link>
+          </Nav.Item>
+          <Nav.Item as="li">
+            <Link to="/order-history">Historial de pedidos</Link>
           </Nav.Item>
         </Nav>
         <Nav className="justify-content-end">
@@ -50,6 +53,10 @@ const Header = (props) => {
           <Cart cart={props.cart} />
         </Modal.Body>
         <Modal.Footer>
+          <Link to="/resumen-pedido">
+            <Button variant="primary">Realizar Pedido</Button>
+
+          </Link>
           <Button variant="secondary" onClick={handleToggleModal}>
             Cerrar
           </Button>
