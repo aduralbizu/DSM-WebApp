@@ -93,12 +93,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/product-list'
-            element={<ProductList
-              products={products}
-            />
-            }
-          />
+         
           <Route path='/resumen-pedido'
             element={<Checkout
               cart={cart}
@@ -109,7 +104,7 @@ function App() {
           <Route path='/info-pedido'
             element={<CheckoutForm />}
           />
-
+          <Route path='/product-list' element={<Products products={products} />} />
           <Route path='*' element={<ErrorPage />} />
 
           <Route path='/about-us' element={<AboutUs />}/>
