@@ -54,8 +54,7 @@ const Header = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Link to="/resumen-pedido">
-            <Button variant="primary">Realizar Pedido</Button>
-
+            <Button variant="primary" onClick={handleToggleModal}>Realizar Pedido</Button>
           </Link>
           <Button variant="secondary" onClick={handleToggleModal}>
             Cerrar

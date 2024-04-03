@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const Products = (props) => {
+const Products = () => {
 
     //Aquí un filtrado
     const [products, setProducts] = useState([]);

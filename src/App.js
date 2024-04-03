@@ -92,24 +92,14 @@ function App() {
         <Header cart={cart} />
 
         <Routes>
-          <Route path='/' element={<Home />} />
-         
-          <Route path='/resumen-pedido'
-            element={<Checkout
-              cart={cart}
-            />
-            }
-          />
-
-          <Route path='/info-pedido'
-            element={<CheckoutForm />}
-          />
+          <Route path='/' element={<Home />} />     
+          <Route path='/resumen-pedido' element={<Checkout cart={cart} />}/>
+          <Route path='/info-pedido' element={<CheckoutForm cart={cart}/>}/>
           <Route path='/product-list' element={<Products products={products} />} />
-          <Route path='*' element={<ErrorPage />} />
-
           <Route path='/about-us' element={<AboutUs />}/>
           <Route path='/contact' element={<Contact />}/>
           <Route path='/order-history' element={<OrderHistory />} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
 
         <Footer />
