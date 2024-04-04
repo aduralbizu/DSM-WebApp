@@ -23,7 +23,7 @@ const OrderSummary = ({ cart }) => {
                     <li key={item.id}>
                         <div className='producto'>
                             <h3 className="nombreProducto">{item.name}</h3>
-                            <Image className="imagen" src={item.image} rounded />
+                            <Image className="imagen2" src={item.image} rounded />
                             <p className='precio'>{item.price} €</p>
                             <p>- Cantidad: {item.quantity} - Precio: {(item.price * item.quantity).toFixed(2)} €</p>
                         </div>
