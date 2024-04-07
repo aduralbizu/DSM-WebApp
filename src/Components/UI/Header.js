@@ -27,10 +27,10 @@ const Header = (props) => {
         </Link>
         <Nav className="header-links">
           <Nav.Item as="li">
-            <Link to="/">Inicio |</Link>
+            <Link to="/">Inicio</Link>
           </Nav.Item>
           <Nav.Item as="li">
-            <Link to="/product-list">Lista de productos |</Link>
+            <Link to="/product-list">Lista de productos</Link>
           </Nav.Item>
           <Nav.Item as="li">
             <Link to="/order-history">Historial de pedidos</Link>

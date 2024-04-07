@@ -1,6 +1,11 @@
-.contenedorInfo{
+.contenedorInfo {
     border-radius: 1rem;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(206, 196, 196);
+}
+
+.imagenAgradecimiento {
+    width: 15rem;
+    height: auto;
 }

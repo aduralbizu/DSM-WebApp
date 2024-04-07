@@ -47,6 +47,9 @@ function App() {
 
   const addToCart = (productId) => {
 
+    console.log("El id que llega:");
+    console.log(productId);
+
     const productToAdd = products.find(product => product.id === productId); //devuelve primer elto encontrado
     const productInCart = cart.find(item => item.id === productId);
 
@@ -60,8 +63,9 @@ function App() {
       });
       setCart(updatedCart);
     } else { // Si el producto no está en el carrito, agregarlo con cantidad 1
+      console.log("hola"+productToAdd.image)
       setCart([...cart, { ...productToAdd, quantity: 1, image: productToAdd.image }]);
-      //setCart([...cart, { ...productToAdd, quantity: 1 }]);
+      // setCart([...cart, { ...productToAdd, quantity: 1 }]);
     }
   };
 

@@ -13,21 +13,21 @@ const Home = () => {
             <Container className='mb-3'>
                 <Carousel>
                     <Carousel.Item>
-                        <Image className='imagenCarousel' alt='primera' src='fsdfds../../../../Images/supermarket.jpg'></Image>
+                        <Image className='imagenCarousel' alt='primera' src='../../../../Images/supermarket.jpg'></Image>
                         <Carousel.Caption>
                             <h3>La mejor calidad</h3>
                             <p>Vendemos solamente productos naturales sin pesticidas.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        <Image className='imagenCarousel' alt='segunda' src='fsdfds../../../../Images/km0.jpg'></Image>
+                        <Image className='imagenCarousel' alt='segunda' src='../../../../Images/km0.jpg'></Image>
                         <Carousel.Caption>
                             <h3>De km 0</h3>
                             <p>Nos preocupamos en apoyar el comercio local.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        <Image className='imagenCarousel' alt='tercera' src='fsdfds../../../../Images/affordableFood.jpg'></Image>
+                        <Image className='imagenCarousel' alt='tercera' src='../../../../Images/affordableFood.jpg'></Image>
                         <Carousel.Caption>
                             <h3>Precios razonables</h3>
                             <p>

@@ -1,9 +1,13 @@
-import React from 'react';
-import { Image, Button } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Image, Button, Container, Row, Col } from 'react-bootstrap';
+import CartContext from "../../Contexts/CartContext";
 import './OrderSummary.css'; // Importa el archivo CSS con los estilos
 import { Link } from 'react-router-dom';
 
+
 const OrderSummary = ({ cart }) => {
+
+    const cartContext = useContext(CartContext);
 
     const calculateTotal = () => {
         let total = 0;
@@ -14,30 +18,58 @@ const OrderSummary = ({ cart }) => {
         return total.toFixed(2);
     };
 
+    const anadirUnidadHandler = (event) => {
+        // console.log(event.currentTarget.value);
+        cartContext.addToCart(event.currentTarget.value);
+    };
+
+    const sustraerUnidadHandler = (event) => {
+        // console.log(event.currentTarget.value);
+        cartContext.removeFromCart(event.currentTarget.value);
+    };
+
     return (
-        <div className="checkout-summary">
-            <h2>¿Estás seguro?</h2>
-            <p>Resumen del pedido:</p>
-            <ul>
-                {cart.map(item => (
-                    <li key={item.id}>
-                        <div className='producto'>
-                            <h3 className="nombreProducto">{item.name}</h3>
-                            <Image className="imagen2" src={item.image} rounded />
-                            <p className='precio'>{item.price} €</p>
-                            <p>- Cantidad: {item.quantity} - Precio: {(item.price * item.quantity).toFixed(2)} €</p>
-                        </div>
-                    </li>
-                ))}
-                <p className="total">Total: {calculateTotal()} €</p>
-            </ul>
+        <>
+            <Container className="my-4 px-0 ">
+                <p className="fs-4 fw-medium py-0 my-0">Resumen del pedido:</p>
+            </Container>
+            <Container className="p-0 contenedorScroll">
+                <ul className="list-group">
+                    {cart.map(item => (
+                        <li className="list-group-item bordeProducto" key={item.id}>
+                            <Container className='text-center'>
+                                <Row className='align-items-center'>
+                                    <Col><Image className="imagen2" src={item.image} /></Col>
+                                    <Col><p className="fs-5 fw-semibold m-0">{item.name}</p></Col>
+                                    <Col><p className="m-0">{item.price} €</p></Col>
+                                    <Col> <p className="m-0 text-primary fw-bold">x{item.quantity} </p></Col>
+                                    <Col> <p className="m-0"> Precio: {(item.price * item.quantity).toFixed(2)} €</p></Col>
+                                    <Col xs={12} sm={2}>
+                                        <Button value={item.id} onClick={anadirUnidadHandler} className="m-1 parejaBotones" variant="success" title="Añadir unidad" >
+                                            <i className="bi bi-cart-plus"></i>
+                                        </Button>
+                                        <Button value={item.id} onClick={sustraerUnidadHandler} className="m-1 parejaBotones" variant="danger" title="Sustraer unidad">
+                                            <i className="bi bi-cart-x"></i>
+                                        </Button>
+                                    </Col>
+                                </Row>
 
-            <Link to="/info-pedido">
-                <Button variant="primary">Continuar</Button>
-            </Link>
-
-            <Button variant="secondary">Cancelar</Button>
-        </div>
+                            </Container>
+                        </li>
+                    ))}
+                    
+                </ul>
+            </Container>
+            <Container className=''>
+            <p className="fs-5 mt-3 fw-semibold">Total: {calculateTotal()} €</p>
+                <Link to="/info-pedido">
+                    <Button className="me-2 mb-3" variant="primary">Continuar</Button>
+                </Link>
+                <Link to="/product-list">
+                    <Button className="mb-3" variant="danger">Cancelar</Button>
+                </Link>
+            </Container>
+        </>
     );
 }
 
