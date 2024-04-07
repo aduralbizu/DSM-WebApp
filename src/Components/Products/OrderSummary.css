@@ -22,6 +22,6 @@
 
 .contenedorScroll {
   width: 300px; /* Ancho deseado del contenedor */
-  height: 22em; /* Altura deseada del contenedor */
+  max-height: 22em; /* Altura deseada del contenedor */
   overflow: auto; /* Agrega barras de desplazamiento cuando sea necesario */
 }

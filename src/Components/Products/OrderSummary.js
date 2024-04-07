@@ -57,11 +57,11 @@ const OrderSummary = ({ cart }) => {
                             </Container>
                         </li>
                     ))}
-                    
+
                 </ul>
             </Container>
-            <Container className=''>
-            <p className="fs-5 mt-3 fw-semibold">Total: {calculateTotal()} €</p>
+            <Container className='mb-3'>
+                <p className="fs-5 mt-3 fw-semibold">Total: {calculateTotal()} €</p>
                 <Link to="/info-pedido">
                     <Button className="me-2 mb-3" variant="primary">Continuar</Button>
                 </Link>

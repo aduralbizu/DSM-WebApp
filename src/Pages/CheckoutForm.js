@@ -1,11 +1,17 @@
 import { Button, Container, Col, Row, Form, Image } from "react-bootstrap";
 import './CheckoutForm.css'
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import CartContext from "../Contexts/CartContext";
 
 const CheckoutForm = (props) => {
+
+    const nombreRef = useRef(); //Esta variable va a ser un puntero. Es lo que estamos diciendo.
+
+    useEffect(()=>{  //Una vez cargada la página, focuseamos 
+        nombreRef.current.focus(); //Nada más llegar a la página, se focusea el nombre para invitar al usuario a rellenar los controlls
+    },[]);
 
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -49,6 +55,40 @@ const CheckoutForm = (props) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
+
+        // Validation checks
+        if (!isNaN(nombre)) { //trim elimina whitespaces a ambos lados del string
+            alert('Nombre debe ser de tipo string');
+            return;
+        }
+
+        if (!isNaN(nombre)) {
+            alert('Apellidos debe ser de tipo string');
+            return;
+        }
+
+        let numeroTelefonoTrimmed = numeroTelefono.trim();
+        const numeroTelefonoRegex = /^\d{9}$/;
+        if (isNaN(numeroTelefonoTrimmed) || !numeroTelefonoRegex.test(numeroTelefonoTrimmed)) {
+            alert('Numero Telefono debe ser un de 9 dígitos');
+            return;
+        }
+
+        let codigoPostalTrimmed = codigoPostal.trim();
+        const codigoPostalRegex = /^\d{5}$/;
+        if (isNaN(codigoPostalTrimmed) || !codigoPostalRegex.test(codigoPostalTrimmed)) {
+            alert('Código Postal debe ser un numero de 5 dígitos');
+            return;
+        }
+        if ( !isNaN(provincia)) {
+            alert('Provincia debe ser de tipo string');
+            return;
+        }
+
+        if (typeof pais !== 'string') {
+            alert('Pais debe ser de tipo string');
+            return;
+        }
 
         const infoCliente = {
             apellidos: apellidos,
@@ -102,7 +142,7 @@ const CheckoutForm = (props) => {
                 <p className="fs-5 fw-medium py-0 my-0">Datos del comprador</p>
                 <Row>
                     <Col><Form.Label className="my-2">Nombre</Form.Label>
-                        <Form.Control onChange={nombreHandler} required type="text" placeholder="Nombre" value={nombre} />
+                        <Form.Control ref = {nombreRef} onChange={nombreHandler} required type="text" placeholder="Nombre" value={nombre} />
                     </Col>
                     <Col><Form.Label className="my-2">Apellidos</Form.Label>
                         <Form.Control onChange={apellidosHandler} required type="text" placeholder="Apellidos" value={apellidos} />
