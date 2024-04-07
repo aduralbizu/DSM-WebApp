@@ -2,7 +2,7 @@ import { Button, Container, Col, Row, Form, Image } from "react-bootstrap";
 import './CheckoutForm.css'
 import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import CartContext from "../Contexts/CartContext";
 
 const CheckoutForm = (props) => {
@@ -12,6 +12,8 @@ const CheckoutForm = (props) => {
     useEffect(()=>{  //Una vez cargada la página, focuseamos 
         nombreRef.current.focus(); //Nada más llegar a la página, se focusea el nombre para invitar al usuario a rellenar los controlls
     },[]);
+
+    const navigate = useNavigate();
 
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -112,6 +114,11 @@ const CheckoutForm = (props) => {
                 pedido
             )
         })
+
+        if (resumenPedido.length == 0) {
+            alert("El carrito está vacío, no se puede hacer la petición.");
+            navigate("/");
+        }
 
         const producto = {
             infoCliente,
