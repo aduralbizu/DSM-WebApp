@@ -19,6 +19,10 @@ const Header = (props) => {
     return uds;
   };
 
+  const isCartEmpty = () => {
+    return props.cart.length === 0;
+  };
+
   return (
     <>
       <div className="header">
@@ -50,12 +54,20 @@ const Header = (props) => {
           <Modal.Title>Cesta</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Cart cart={props.cart} />
+          {isCartEmpty() ? (
+            <p>La cesta está vacía</p>
+          ) : (
+            <Cart cart={props.cart} />
+          )}
         </Modal.Body>
         <Modal.Footer>
-          <Link to="/resumen-pedido">
-            <Button variant="primary" onClick={handleToggleModal}>Realizar Pedido</Button>
-          </Link>
+        {!isCartEmpty() && (
+            <Link to="/resumen-pedido">
+              <Button variant="primary" onClick={handleToggleModal}>
+                Realizar Pedido
+              </Button>
+            </Link>
+          )}
           <Button variant="secondary" onClick={handleToggleModal}>
             Cerrar
           </Button>
