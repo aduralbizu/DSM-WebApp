@@ -42,3 +42,30 @@
 .borrar-pedido:hover {
   background-color: #c82333;
 }
+
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section label {
+  margin-right: 10px;
+}
+
+.filter-section input[type="date"] {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.filter-section button {
+  padding: 5px 10px;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-section button:hover {
+  background-color: #ffca28;
+}
+

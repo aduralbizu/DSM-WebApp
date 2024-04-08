@@ -6,6 +6,8 @@ import './OrderHistory.css'; // Importa el archivo CSS con los estilos
 
 const OrderHistory = () => {
     const [historial, setHistorial] = useState({});
+    const [fechaInicio, setFechaInicio] = useState('');
+    const [fechaFin, setFechaFin] = useState('');
 
     useEffect(() => {
         axios.get('https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/historial.json')
@@ -36,14 +38,36 @@ const OrderHistory = () => {
         }
     };
 
+    const handleFiltrarPorFechas = () => {
+        // Filtrar los pedidos por el rango de fechas seleccionado
+        const filteredHistorial = Object.entries(historial).filter(([pedidoId, pedido]) => {
+            const fechaPedido = new Date(pedido.infoCliente.fechaPedido);
+            const inicio = fechaInicio ? new Date(fechaInicio) : null;
+            const fin = fechaFin ? new Date(fechaFin) : null;
+            return (!inicio || fechaPedido >= inicio) && (!fin || fechaPedido <= fin);
+        });
+        return filteredHistorial;
+    };
+
+    const filteredHistorial = handleFiltrarPorFechas();
+
     return (
         <div className="order-history">
             <h2>Historial de Pedidos</h2>
+            <div className="filter-section">
+                <label htmlFor="fechaInicio">Desde:</label>
+                <input type="date" id="fechaInicio" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} />
+                <label htmlFor="fechaFin">Hasta:</label>
+                <input type="date" id="fechaFin" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} />
+                <Button onClick={handleFiltrarPorFechas}>Filtrar</Button>
+            </div>
             <ul className="order-list">
-                {Object.keys(historial).map((pedidoId) => (
+                {filteredHistorial.map(([pedidoId, pedido]) => (
                     <li key={pedidoId} className="order-item">
                         <div className="order-info">
                             <span><strong>Pedido ID:</strong> {pedidoId}</span>
+                            <span><strong>Fecha de pedido:</strong> {pedido.infoCliente.fechaPedido}</span>
+
                             <Link to={`/order-details/${pedidoId}`} className="ver-detalles-link">Ver detalles</Link>
                             <Button className="borrar-pedido" onClick={() => handleDeletePedido(pedidoId)}>Eliminar Pedido</Button>
                         </div>
