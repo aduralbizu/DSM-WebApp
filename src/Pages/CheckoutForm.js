@@ -120,7 +120,9 @@ const CheckoutForm = (props) => {
             nombre: nombre,
             numeroTelefono: numeroTelefono,
             pais: pais,
-            provincia: provincia
+            provincia: provincia,
+            fechaPedido: new Date(),
+            cuentaCorreo: "pepe@gmail.com"
         }
 
         var resumenPedido = [];
@@ -139,6 +141,7 @@ const CheckoutForm = (props) => {
         if (resumenPedido.length == 0) {
             alert("El carrito está vacío, no se puede hacer la petición.");
             navigate("/");
+            return;
         }
 
         const producto = {
