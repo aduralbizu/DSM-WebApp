@@ -13,7 +13,6 @@ import Contact from './Pages/Contact';
 import AboutUs from './Pages/AboutUs';
 import OrderHistory from './Pages/OrderHistory';
 import Login from './Components/Login/Login';
-import Login from './Components/Login/Login';
 import OrderDetails from './Pages/OrderDetails';
 import OrderSummary from './Pages/OrderSummary';
 
