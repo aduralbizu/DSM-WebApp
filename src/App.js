@@ -15,6 +15,7 @@ import OrderHistory from './Pages/OrderHistory';
 import Login from './Components/Login/Login';
 import OrderDetails from './Pages/OrderDetails';
 import OrderSummary from './Pages/OrderSummary';
+import Register from './Components/Login/Register';
 
 function App() {
 
@@ -26,18 +27,18 @@ function App() {
     setLogin(login);
     setloginDataIdToken(loginData.idToken);
     setloginDataEmail(loginData.email);
-    localStorage.setItem('login',login);
-    localStorage.setItem('loginDataIdToken',loginData.idToken);
-    localStorage.setItem('loginDataEmail',loginData.email);
+    localStorage.setItem('login', login);
+    localStorage.setItem('loginDataIdToken', loginData.idToken);
+    localStorage.setItem('loginDataEmail', loginData.email);
   }
 
-  useEffect(()=>{
-    if(localStorage.getItem('login')==='true'){ //Recuerda que localStorage serializa todo como string. Serialiar: El proceso de convertir el estado de un objeto en un formato que se pueda almacenar o transportar
+  useEffect(() => {
+    if (localStorage.getItem('login') === 'true') { //Recuerda que localStorage serializa todo como string. Serialiar: El proceso de convertir el estado de un objeto en un formato que se pueda almacenar o transportar
       setLogin(true);
-      setloginDataIdToken({idToken:localStorage.getItem('loginDataIdToken')});
-      setloginDataEmail({email:localStorage.getItem('loginDataEmail')});
+      setloginDataIdToken(localStorage.getItem('loginDataIdToken'));
+      setloginDataEmail(localStorage.getItem('loginDataEmail'));
     }
-  },[]); //[] para que se ejecute solo cuando se carga
+  }, []); //[] para que se ejecute solo cuando se carga
 
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(() => {
@@ -107,21 +108,21 @@ function App() {
     <>
       <CartContext.Provider value={{ addToCart: addToCart, removeFromCart: removeFromCart, clearCart: clearCart }}>
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Header cart={cart} actualizarLogin = {actualizarLogin} login={login}actualizarLogin = {actualizarLogin} login={login}/>
+          <Header cart={cart} actualizarLogin={actualizarLogin} login={login} />
 
           <div style={{ flex: '1' }}>
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/resumen-pedido' element={<OrderSummary cart={cart} />} />
-              <Route path='/info-pedido' element={<CheckoutForm cart={cart} />} />
+              <Route path='/info-pedido' element={<CheckoutForm cart={cart} loginDataIdToken={loginDataIdToken} loginDataEmail={loginDataEmail} />} />
               <Route path='/product-list' element={<Products products={products} />} />
               <Route path='/about-us' element={<AboutUs />} />
               <Route path='/contact' element={<Contact />} />
-              <Route path='/order-history' element={<OrderHistory />} />
-              <Route path='/order-details/:id' element={<OrderDetails />} />
-              <Route path='/login' element={<Login actualizarLogin={actualizarLogin}/>} />
-          <Route path='/login' element={<Login actualizarLogin={actualizarLogin}/>} />
-          <Route path='*' element={<ErrorPage />} />
+              <Route path='/order-history' element={<OrderHistory login={login} loginDataIdToken={loginDataIdToken} loginDataEmail={loginDataEmail} />} />
+              <Route path='/order-details/:id' element={<OrderDetails login={login} />} />
+              <Route path='/login' element={<Login actualizarLogin={actualizarLogin} />} />
+              <Route path='/register' element={<Register actualizarLogin={actualizarLogin} />} />
+              <Route path='*' element={<ErrorPage />} />
             </Routes>
           </div>
 

@@ -26,17 +26,19 @@ const Header = (props) => {
     return props.cart.length === 0;
   };
 
-  const logoutHandler = () => {
+  const logoutHandler = (event) => {
+    event.preventDefault();
+    navega("/");
     props.actualizarLogin(false, {});
     alert("Ha cerrado sesión");
-    navega("/home");
+    return;
   }
 
   return (
     <>
       <div className="header">
         <Link to="/" className="header-logo">
-        <Image src="../../../../Images/cesta-de-la-compra.png" alt="Abelki Logo" className="logo-image" /> 
+          <Image src="../../../../Images/cesta-de-la-compra.png" alt="Abelki Logo" className="logo-image" />
           Abelki
         </Link>
         <Nav className="header-links">
@@ -51,9 +53,12 @@ const Header = (props) => {
           </Nav.Item>
           {props.login ? (<Nav.Item as="li">
             <Link onClick={logoutHandler}>Log out</Link>
-          </Nav.Item>) : (<Nav.Item as="li">
+          </Nav.Item>) : (<><Nav.Item as="li">
             <Link to="/login">Login</Link>
-          </Nav.Item>)}
+          </Nav.Item>
+            <Nav.Item as="li">
+              <Link to="/register">Register</Link>
+            </Nav.Item></>)}
         </Nav>
         <Nav className="justify-content-end">
           <Nav.Item>

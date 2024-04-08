@@ -1,5 +1,6 @@
 .containerLogin{
     width: 25rem;
-    background-color:  #e9ecee;
+    background-color:  #f8f9fa;
     border-radius: 1rem;
+    border: 1px solid #ddd;
 }

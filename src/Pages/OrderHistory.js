@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Button, Container, Alert } from 'react-bootstrap';
+import { Link, useNavigate } from "react-router-dom";
 import './OrderHistory.css'; // Importa el archivo CSS con los estilos
 
-const OrderHistory = () => {
+const OrderHistory = (props) => {
     const [historial, setHistorial] = useState({});
     const [fechaInicio, setFechaInicio] = useState('');
     const [fechaFin, setFechaFin] = useState('');
 
+    const navegar = useNavigate();
+
     useEffect(() => {
+
+        if (!props.login) {
+            navegar("/login");
+        }
+
         axios.get('https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/historial.json')
             .then(response => {
                 if (response.data && typeof response.data === 'object') {
@@ -25,7 +32,7 @@ const OrderHistory = () => {
 
     const handleDeletePedido = (pedidoId) => {
         if (window.confirm("¿Estás seguro de que quieres eliminar este pedido?")) {
-            axios.delete(`https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/historial/${pedidoId}.json`)
+            axios.delete(`https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/historial/${pedidoId}.json?auth=${props.loginDataIdToken}`)
                 .then(response => {
                     console.log("Pedido eliminado de la base de datos");
                     const updatedHistorial = { ...historial };
@@ -49,32 +56,50 @@ const OrderHistory = () => {
         return filteredHistorial;
     };
 
-    const filteredHistorial = handleFiltrarPorFechas();
+    let filteredHistorial = handleFiltrarPorFechas();
+    filteredHistorial = filteredHistorial.filter((element) => {
+        return element[1].infoCliente.cuentaCorreo === props.loginDataEmail;
+    }); //Filtramos por email
+
+    let content = <>
+        <ul className="order-list">
+            {filteredHistorial.map(([pedidoId, pedido]) => (
+                <li key={pedidoId} className="order-item">
+                    <div className="order-info">
+                        <span><strong>Pedido ID:</strong> {pedidoId}</span>
+                        <span><strong>Fecha de pedido:</strong> {pedido.infoCliente.fechaPedido}</span>
+
+                        <Link to={`/order-details/${pedidoId}`} className="ver-detalles-link">Ver detalles</Link>
+                        <Button className="borrar-pedido" onClick={() => handleDeletePedido(pedidoId)}>Eliminar Pedido</Button>
+                    </div>
+                </li>
+            ))}
+        </ul>
+    </>
+
+    if (filteredHistorial.length == 0) {
+        content = <Container className="text-center mt-5">
+            <Alert variant="danger">
+                No hay pedidos que mostrar para {props.loginDataEmail}.
+            </Alert>
+        </Container>
+    }
 
     return (
-        <div className="order-history">
-            <h2>Historial de Pedidos</h2>
-            <div className="filter-section">
-                <label htmlFor="fechaInicio">Desde:</label>
-                <input type="date" id="fechaInicio" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} />
-                <label htmlFor="fechaFin">Hasta:</label>
-                <input type="date" id="fechaFin" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} />
-                <Button onClick={handleFiltrarPorFechas}>Filtrar</Button>
+        <>
+            <div className="order-history my-3">
+                <h2>Historial de Pedidos</h2>
+                <div className="filter-section">
+                    <label htmlFor="fechaInicio">Desde:</label>
+                    <input type="date" id="fechaInicio" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} />
+                    <label htmlFor="fechaFin">Hasta:</label>
+                    <input type="date" id="fechaFin" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} />
+                    <Button onClick={handleFiltrarPorFechas}>Filtrar</Button>
+                </div>
+                {content}
             </div>
-            <ul className="order-list">
-                {filteredHistorial.map(([pedidoId, pedido]) => (
-                    <li key={pedidoId} className="order-item">
-                        <div className="order-info">
-                            <span><strong>Pedido ID:</strong> {pedidoId}</span>
-                            <span><strong>Fecha de pedido:</strong> {pedido.infoCliente.fechaPedido}</span>
-
-                            <Link to={`/order-details/${pedidoId}`} className="ver-detalles-link">Ver detalles</Link>
-                            <Button className="borrar-pedido" onClick={() => handleDeletePedido(pedidoId)}>Eliminar Pedido</Button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
+            
+        </>
     );
 }
 
