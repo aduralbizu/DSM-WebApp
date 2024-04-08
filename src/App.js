@@ -12,10 +12,33 @@ import CheckoutForm from './Pages/CheckoutForm';
 import Contact from './Pages/Contact';
 import AboutUs from './Pages/AboutUs';
 import OrderHistory from './Pages/OrderHistory';
+import Login from './Components/Login/Login';
 import OrderDetails from './Pages/OrderDetails';
 import OrderSummary from './Pages/OrderSummary';
 
 function App() {
+
+  const [login, setLogin] = useState(false);
+  const [loginDataIdToken, setloginDataIdToken] = useState('');
+  const [loginDataEmail, setloginDataEmail] = useState('');
+
+  const actualizarLogin = (login, loginData) => {
+    setLogin(login);
+    setloginDataIdToken(loginData.idToken);
+    setloginDataEmail(loginData.email);
+    localStorage.setItem('login',login);
+    localStorage.setItem('loginDataIdToken',loginData.idToken);
+    localStorage.setItem('loginDataEmail',loginData.email);
+  }
+
+  useEffect(()=>{
+    if(localStorage.getItem('login')==='true'){ //Recuerda que localStorage serializa todo como string. Serialiar: El proceso de convertir el estado de un objeto en un formato que se pueda almacenar o transportar
+      setLogin(true);
+      setloginDataIdToken({idToken:localStorage.getItem('loginDataIdToken')});
+      setloginDataEmail({email:localStorage.getItem('loginDataEmail')});
+    }
+  },[]); //[] para que se ejecute solo cuando se carga
+
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(() => {
     const storedCart = localStorage.getItem('cart');
@@ -84,7 +107,7 @@ function App() {
     <>
       <CartContext.Provider value={{ addToCart: addToCart, removeFromCart: removeFromCart, clearCart: clearCart }}>
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Header cart={cart} />
+          <Header cart={cart} actualizarLogin = {actualizarLogin} login={login}/>
 
           <div style={{ flex: '1' }}>
             <Routes>
@@ -96,7 +119,8 @@ function App() {
               <Route path='/contact' element={<Contact />} />
               <Route path='/order-history' element={<OrderHistory />} />
               <Route path='/order-details/:id' element={<OrderDetails />} />
-              <Route path='*' element={<ErrorPage />} />
+              <Route path='/login' element={<Login actualizarLogin={actualizarLogin}/>} />
+          <Route path='*' element={<ErrorPage />} />
             </Routes>
           </div>
 
