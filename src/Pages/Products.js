@@ -1,4 +1,4 @@
-import { Alert, Col, Row, Container } from "react-bootstrap";
+import { Col, Row, Container } from "react-bootstrap";
 import Product from "../Components/Products/Product";
 import ProductFilter from "../Components/Products/ProductFilter";
 import { useEffect, useState } from "react";
@@ -35,6 +35,7 @@ const Products = () => {
 
     let contenido =
         <>
+            <p></p>
             <ProductFilter products={products} setFilteredProducts={setFilteredProducts} />
 
             <Container className="text-center pt-3 pb-3">

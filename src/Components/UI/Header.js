@@ -44,7 +44,7 @@ const Header = (props) => {
         <Nav className="justify-content-end">
           <Nav.Item>
             <Nav.Link onClick={handleToggleModal} style={{ marginRight: "10px" }}>
-              🛒 Carrito <Badge variant="primary">{calculateUds()}</Badge>
+              🛒 Cesta <Badge variant="primary">{calculateUds()}</Badge>
             </Nav.Link>
           </Nav.Item>
         </Nav>

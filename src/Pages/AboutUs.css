@@ -4,14 +4,19 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
-  .about-us-heading {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .about-us-text {
-    font-size: 18px;
-    margin-bottom: 15px;
-  }
+
+  .about-us-image {
+    margin-top: 20px; /* Espacio entre el texto y la imagen */
+    text-align: center; /* Centra la imagen */
+}
+
+.about-us-image img {
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: auto; /* Permite que la altura se ajuste automáticamente según el ancho */
+}
+
+
+.textHome{
+  font-weight: lighter;
+}
   
