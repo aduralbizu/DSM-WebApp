@@ -122,7 +122,7 @@ const CheckoutForm = (props) => {
             pais: pais,
             provincia: provincia,
             fechaPedido: new Date(),
-            cuentaCorreo: "pepe@gmail.com"
+            cuentaCorreo: props.loginDataEmail
         }
 
         var resumenPedido = [];
@@ -144,23 +144,25 @@ const CheckoutForm = (props) => {
             return;
         }
 
-        const producto = {
+        const pedido = {
             infoCliente,
             resumenPedido
         }
 
-        axios.post('https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/historial.json', producto)
+        axios.post('https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/historial.json?auth=' + props.loginDataIdToken, pedido)
             .then((response) => {
                 console.log("El producto se ha insertado en la BD");
+                cartContext.clearCart(); //Vaciamos el carrito
+                setcompleted(true); //Pasamos  ventana de agradecimientos
             })
             .catch((error) => {
-                alert("Se ha producido un error");
+                console.log(error);
+                if (error.request.statusText == "Unauthorized"){
+                    alert("Por favor, inicie sesión.");
+                    navigate("/login");
+                }
+                else alert("Se ha producido un error");
             })
-
-        cartContext.clearCart(); //Vaciamos el carrito
-        setcompleted(true); //Pasamos  ventana de agradecimientos
-
-
     }
 
 

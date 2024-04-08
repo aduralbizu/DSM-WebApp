@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Image } from 'react-bootstrap';
 import './OrderDetails.css';
 import '../Components/Products/Product.css';
 
-const OrderDetails = () => {
+
+const OrderDetails = (props) => {
     const [mostrarPedido, setMostrarPedido] = useState({});
     const [products, setProducts] = useState([]);
     const parametros = useParams();
 
+    const navegar = useNavigate();
+
     useEffect(() => {
+
+        if (!props.login){
+            navegar("/login");
+        }
+
         axios.get(`https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/historial/${parametros.id}.json`)
             .then(response => {
                 if (response.data && typeof response.data === 'object') {

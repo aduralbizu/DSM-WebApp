@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Badge, Nav, Modal, Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Cart from "../Products/Cart";
+import { useNavigate } from 'react-router-dom';
 import "./Header.css";
 
 const Header = (props) => {
+  const navega = useNavigate();
+
   const [showModal, setShowModal] = useState(false);
 
   const handleToggleModal = () => {
@@ -23,11 +26,19 @@ const Header = (props) => {
     return props.cart.length === 0;
   };
 
+  const logoutHandler = (event) => {
+    event.preventDefault();
+    navega("/");
+    props.actualizarLogin(false, {});
+    alert("Ha cerrado sesión");
+    return;
+  }
+
   return (
     <>
       <div className="header">
         <Link to="/" className="header-logo">
-        <Image src="../../../../Images/cesta-de-la-compra.png" alt="Abelki Logo" className="logo-image" /> 
+          <Image src="../../../../Images/cesta-de-la-compra.png" alt="Abelki Logo" className="logo-image" />
           Abelki
         </Link>
         <Nav className="header-links">
@@ -40,6 +51,14 @@ const Header = (props) => {
           <Nav.Item as="li">
             <Link to="/order-history">Historial de pedidos</Link>
           </Nav.Item>
+          {props.login ? (<Nav.Item as="li">
+            <Link onClick={logoutHandler}>Log out</Link>
+          </Nav.Item>) : (<><Nav.Item as="li">
+            <Link to="/login">Login</Link>
+          </Nav.Item>
+            <Nav.Item as="li">
+              <Link to="/register">Register</Link>
+            </Nav.Item></>)}
         </Nav>
         <Nav className="justify-content-end">
           <Nav.Item>
@@ -62,7 +81,7 @@ const Header = (props) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-        {!isCartEmpty() && (
+          {!isCartEmpty() && (
             <Link to="/resumen-pedido">
               <Button variant="primary" onClick={handleToggleModal}>
                 Realizar Pedido
