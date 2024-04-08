@@ -30,7 +30,9 @@ const ProductFilter = ({ products, setFilteredProducts }) => {
           placeholder="Precio mínimo"
           value={minPrice}
           onChange={e => setMinPrice(e.target.value)}
+          
         />
+        
         <InputGroup.Text>-</InputGroup.Text>
         <Form.Control
           type="number"

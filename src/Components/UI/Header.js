@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Badge, Nav, Modal, Button } from "react-bootstrap";
+import { Badge, Nav, Modal, Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Cart from "../Products/Cart";
 import "./Header.css";
@@ -27,6 +27,7 @@ const Header = (props) => {
     <>
       <div className="header">
         <Link to="/" className="header-logo">
+        <Image src="../../../../Images/cesta-de-la-compra.png" alt="Abelki Logo" className="logo-image" /> 
           Abelki
         </Link>
         <Nav className="header-links">

@@ -43,4 +43,9 @@
     color: #860000;
 }
 
+.logo-image {
+    width: 50px; /* Ajusta el ancho de la imagen según sea necesario */
+    height: auto; /* Permite que la altura se ajuste automáticamente según el ancho */
+    margin-right: 10px; /* Espacio entre el logo y el texto del nombre */
+  }
 

@@ -6,24 +6,20 @@ import Footer from './Components/UI/Footer';
 import ErrorPage from './Pages/ErrorPage';
 import { useEffect, useState } from 'react';
 import CartContext from './Contexts/CartContext';
-import Products from './Components/Products/Products';
+import Products from './Pages/Products';
 import axios from 'axios';
-//import Checkout from './Pages/Checkout';
 import CheckoutForm from './Pages/CheckoutForm';
 import Contact from './Pages/Contact';
 import AboutUs from './Pages/AboutUs';
 import OrderHistory from './Pages/OrderHistory';
 import OrderDetails from './Pages/OrderDetails';
-import OrderSummary from './Components/Products/OrderSummary';
+import OrderSummary from './Pages/OrderSummary';
 
 function App() {
   const [products, setProducts] = useState([]);
-
-  // Estado del carrito de compras obtenido del localStorage
-  // Esto permite persiste ante recarga, cierre de pestaña, incluso cierre del navegador
   const [cart, setCart] = useState(() => {
     const storedCart = localStorage.getItem('cart');
-    return storedCart ? JSON.parse(storedCart) : []; // si no se encuentra nada, vacio
+    return storedCart ? JSON.parse(storedCart) : [];
   });
 
   useEffect(() => {
@@ -45,7 +41,7 @@ function App() {
       })
   }, []);
 
-  useEffect(() => { // cada vez que cambio var estado cart, lo asigno a almacenamiento local
+  useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
@@ -87,22 +83,26 @@ function App() {
   return (
     <>
       <CartContext.Provider value={{ addToCart: addToCart, removeFromCart: removeFromCart, clearCart: clearCart }}>
-        <Header cart={cart} />
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Header cart={cart} />
 
-        <Routes>
-          <Route path='/' element={<Home />} />     
-          <Route path='/resumen-pedido' element={<OrderSummary cart={cart} />}/>
-          <Route path='/info-pedido' element={<CheckoutForm cart={cart}/>}/>
-          <Route path='/product-list' element={<Products products={products} />} />
-          <Route path='/about-us' element={<AboutUs />}/>
-          <Route path='/contact' element={<Contact />}/>
-          <Route path='/order-history' element={<OrderHistory />} />
-          <Route path='/order-details/:id' element={<OrderDetails />} />
-          <Route path='*' element={<ErrorPage />} />
-        </Routes>
+          <div style={{ flex: '1' }}>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/resumen-pedido' element={<OrderSummary cart={cart} />} />
+              <Route path='/info-pedido' element={<CheckoutForm cart={cart} />} />
+              <Route path='/product-list' element={<Products products={products} />} />
+              <Route path='/about-us' element={<AboutUs />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='/order-history' element={<OrderHistory />} />
+              <Route path='/order-details/:id' element={<OrderDetails />} />
+              <Route path='*' element={<ErrorPage />} />
+            </Routes>
+          </div>
 
-        <Footer />
-      </CartContext.Provider >
+          <Footer />
+        </div>
+      </CartContext.Provider>
     </>
 
   );

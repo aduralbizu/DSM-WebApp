@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Image, Button, Container, Row, Col, Alert } from 'react-bootstrap';
-import CartContext from "../../Contexts/CartContext";
+import CartContext from "../Contexts/CartContext";
 import './OrderSummary.css'; // Importa el archivo CSS con los estilos
 import { Link } from 'react-router-dom';
 

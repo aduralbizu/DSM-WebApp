@@ -1,6 +1,6 @@
 import { Alert, Col, Row, Container } from "react-bootstrap";
-import Product from "./Product";
-import ProductFilter from "./ProductFilter";
+import Product from "../Components/Products/Product";
+import ProductFilter from "../Components/Products/ProductFilter";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
