@@ -13,6 +13,7 @@ import Contact from './Pages/Contact';
 import AboutUs from './Pages/AboutUs';
 import OrderHistory from './Pages/OrderHistory';
 import Login from './Components/Login/Login';
+import Login from './Components/Login/Login';
 import OrderDetails from './Pages/OrderDetails';
 import OrderSummary from './Pages/OrderSummary';
 
@@ -107,7 +108,7 @@ function App() {
     <>
       <CartContext.Provider value={{ addToCart: addToCart, removeFromCart: removeFromCart, clearCart: clearCart }}>
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Header cart={cart} actualizarLogin = {actualizarLogin} login={login}/>
+          <Header cart={cart} actualizarLogin = {actualizarLogin} login={login}actualizarLogin = {actualizarLogin} login={login}/>
 
           <div style={{ flex: '1' }}>
             <Routes>
@@ -120,6 +121,7 @@ function App() {
               <Route path='/order-history' element={<OrderHistory />} />
               <Route path='/order-details/:id' element={<OrderDetails />} />
               <Route path='/login' element={<Login actualizarLogin={actualizarLogin}/>} />
+          <Route path='/login' element={<Login actualizarLogin={actualizarLogin}/>} />
           <Route path='*' element={<ErrorPage />} />
             </Routes>
           </div>
