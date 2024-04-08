@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Image, Button, Container, Row, Col } from 'react-bootstrap';
+import { Image, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import CartContext from "../../Contexts/CartContext";
 import './OrderSummary.css'; // Importa el archivo CSS con los estilos
 import { Link } from 'react-router-dom';
@@ -19,14 +19,26 @@ const OrderSummary = ({ cart }) => {
     };
 
     const anadirUnidadHandler = (event) => {
-        // console.log(event.currentTarget.value);
         cartContext.addToCart(event.currentTarget.value);
     };
 
     const sustraerUnidadHandler = (event) => {
-        // console.log(event.currentTarget.value);
         cartContext.removeFromCart(event.currentTarget.value);
     };
+
+    // Verifica si el carrito está vacío
+    if (cart.length === 0) {
+        return (
+            <Container className="text-center mt-5">
+                <Alert variant="warning">
+                    Tu carrito está vacío.
+                </Alert>
+                <Link to="/product-list">
+                    <Button className="mt-3" variant="danger">Volver a Lista de Productos</Button>
+                </Link>
+            </Container>
+        );
+    }
 
     return (
         <>

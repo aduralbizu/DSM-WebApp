@@ -2,16 +2,34 @@ import { Button, Container, Col, Row, Form, Image } from "react-bootstrap";
 import './CheckoutForm.css'
 import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartContext from "../Contexts/CartContext";
 
 const CheckoutForm = (props) => {
 
     const nombreRef = useRef(); //Esta variable va a ser un puntero. Es lo que estamos diciendo.
 
-    useEffect(()=>{  //Una vez cargada la página, focuseamos 
-        nombreRef.current.focus(); //Nada más llegar a la página, se focusea el nombre para invitar al usuario a rellenar los controlls
-    },[]);
+    useEffect(() => {
+        axios.get('https://restcountries.com/v3.1/all')
+            .then(response => {
+                // Ordenar la lista de países por nombre común
+                const sortedCountries = response.data.sort((a, b) => {
+                    const countryA = a.name.common.toLowerCase();
+                    const countryB = b.name.common.toLowerCase();
+                    if (countryA < countryB) {
+                        return -1;
+                    }
+                    if (countryA > countryB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                setCountries(sortedCountries);
+            })
+            .catch(error => {
+                console.error('Error al obtener la lista de países:', error);
+            });
+    }, []);
 
     const navigate = useNavigate();
 
@@ -24,6 +42,9 @@ const CheckoutForm = (props) => {
     const [pais, setPais] = useState('');
 
     const [completed, setcompleted] = useState(false);
+
+    const [countries, setCountries] = useState([]);
+
 
     const cartContext = useContext(CartContext);
 
@@ -82,7 +103,7 @@ const CheckoutForm = (props) => {
             alert('Código Postal debe ser un numero de 5 dígitos');
             return;
         }
-        if ( !isNaN(provincia)) {
+        if (!isNaN(provincia)) {
             alert('Provincia debe ser de tipo string');
             return;
         }
@@ -149,7 +170,7 @@ const CheckoutForm = (props) => {
                 <p className="fs-5 fw-medium py-0 my-0">Datos del comprador</p>
                 <Row>
                     <Col><Form.Label className="my-2">Nombre</Form.Label>
-                        <Form.Control ref = {nombreRef} onChange={nombreHandler} required type="text" placeholder="Nombre" value={nombre} />
+                        <Form.Control ref={nombreRef} onChange={nombreHandler} required type="text" placeholder="Nombre" value={nombre} />
                     </Col>
                     <Col><Form.Label className="my-2">Apellidos</Form.Label>
                         <Form.Control onChange={apellidosHandler} required type="text" placeholder="Apellidos" value={apellidos} />
@@ -178,11 +199,11 @@ const CheckoutForm = (props) => {
                         <Form.Control onChange={provinciaHandler} type="text" placeholder="Navarra" value={provincia} required />
                     </Col>
                     <Col><Form.Label className="my-2">País</Form.Label>
-                        <Form.Select onChange={paisHandler} type="text" value={pais} aria-label="Default select example" required>
-                            <option >Seleccione país</option>
-                            <option value="España">España</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Portugal">Portugal</option>
+                        <Form.Select onChange={paisHandler} value={pais} aria-label="Default select example" required>
+                            <option>Seleccione país</option>
+                            {countries.map(country => (
+                                <option key={country.name.common} value={country.name.common}>{country.name.common}</option>
+                            ))}
                         </Form.Select>
                     </Col>
 

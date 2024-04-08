@@ -1,0 +1,88 @@
+/* Estilos generales */
+.order-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.order-details-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+}
+
+/* Estilos de contenedores */
+.info-cliente-container,
+.productos-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.info-cliente-container {
+  border-bottom: 1px solid #ccc; /* Línea divisoria entre la información del cliente y los productos */
+}
+
+/* Estilos de información del cliente */
+.info-cliente-container h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.info-cliente-container ul {
+  list-style-type: none; /* Eliminar viñetas de la lista */
+  padding: 0;
+}
+
+.info-cliente-container li {
+  margin-bottom: 5px;
+}
+
+/* Estilos de productos */
+.productos-container h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.producto-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.producto-item:last-child {
+  border-bottom: none;
+}
+
+.producto-info {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.imagen {
+  flex-shrink: 0;
+  width: 100px;
+  height: auto;
+}
+
+/* Estilos para el total del pedido */
+.total-pedido {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.back-to-orders {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #007bff; /* Cambia el color del enlace según tus preferencias */
+}
+
+.back-to-orders:hover {
+  text-decoration: underline;
+}

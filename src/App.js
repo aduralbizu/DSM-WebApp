@@ -8,11 +8,14 @@ import { useEffect, useState } from 'react';
 import CartContext from './Contexts/CartContext';
 import Products from './Components/Products/Products';
 import axios from 'axios';
-import Checkout from './Pages/Checkout';
+//import Checkout from './Pages/Checkout';
 import CheckoutForm from './Pages/CheckoutForm';
 import Contact from './Pages/Contact';
 import AboutUs from './Pages/AboutUs';
 import OrderHistory from './Pages/OrderHistory';
+import OrderDetails from './Pages/OrderDetails';
+import OrderSummary from './Components/Products/OrderSummary';
+
 
 
 
@@ -97,12 +100,13 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Home />} />     
-          <Route path='/resumen-pedido' element={<Checkout cart={cart} />}/>
+          <Route path='/resumen-pedido' element={<OrderSummary cart={cart} />}/>
           <Route path='/info-pedido' element={<CheckoutForm cart={cart}/>}/>
           <Route path='/product-list' element={<Products products={products} />} />
           <Route path='/about-us' element={<AboutUs />}/>
           <Route path='/contact' element={<Contact />}/>
           <Route path='/order-history' element={<OrderHistory />} />
+          <Route path='/order-details/:id' element={<OrderDetails />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
 

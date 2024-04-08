@@ -1,0 +1,24 @@
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.error-content {
+    text-align: center;
+}
+
+.error-heading {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.error-suggestion {
+    font-size: 16px;
+}

@@ -1,48 +1,44 @@
 .order-history {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .order-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .order-item {
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff; /* Establecer un fondo blanco para todos los pedidos */
-  }
-  
-  .order-info {
-    margin-bottom: 10px;
-  }
-  
-  .product-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-    margin-bottom: 10px;
-  }
-  
-  .product-item:last-child {
-    border-bottom: none;
-  }
-  
-  .ver-info-cliente {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .ver-info-cliente:hover {
-    background-color: #0056b3;
-  }
-  
-  .modal-body {
-    padding: 20px;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.order-list {
+  list-style: none;
+  padding: 0;
+}
+
+.order-item {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.order-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-info span {
+  font-weight: bold;
+}
+
+.ver-detalles-link {
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.borrar-pedido {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.borrar-pedido:hover {
+  background-color: #c82333;
+}
