@@ -16,21 +16,19 @@ import OrderHistory from './Pages/OrderHistory';
 import OrderDetails from './Pages/OrderDetails';
 import OrderSummary from './Components/Products/OrderSummary';
 
-
-
-
-
 function App() {
-
   const [products, setProducts] = useState([]);
 
-  // Estado del carrito de compras
-  const [cart, setCart] = useState([]);
+  // Estado del carrito de compras obtenido del localStorage
+  // Esto permite persiste ante recarga, cierre de pestaña, incluso cierre del navegador
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem('cart');
+    return storedCart ? JSON.parse(storedCart) : []; // si no se encuentra nada, vacio
+  });
 
-  useEffect(() => { //Es necesario hacer un GET/ de todos los productos para añadir producto al carrito
+  useEffect(() => {
     axios.get('https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/products.json')
       .then((response) => {
-        // console.log(response.data);
         let arrayProductos = [];
         for (let key in response.data) {
           arrayProductos.push({
@@ -45,30 +43,26 @@ function App() {
       }).catch((error) => {
         alert("Se ha producido un error");
       })
-  }, []); //Dependencia array vacío para que solo se ejecute una vez
+  }, []);
 
+  useEffect(() => { // cada vez que cambio var estado cart, lo asigno a almacenamiento local
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (productId) => {
-
-    console.log("El id que llega:");
-    console.log(productId);
-
-    const productToAdd = products.find(product => product.id === productId); //devuelve primer elto encontrado
+    const productToAdd = products.find(product => product.id === productId);
     const productInCart = cart.find(item => item.id === productId);
 
-    // Si el producto ya está en el carrito, incrementar su cantidad
-    if (productInCart) { // En js if, no solo acepta valores booleanos (tambien thruthy, falsy)
+    if (productInCart) {
       const updatedCart = cart.map(item => {
         if (item.id === productId) {
-          return { ...item, quantity: item.quantity + 1 }; //En js en notacion shallow copy, el primer elto entre llaves siempre copia del objeto, y el segundo propiedad
+          return { ...item, quantity: item.quantity + 1 };
         }
         return item;
       });
       setCart(updatedCart);
-    } else { // Si el producto no está en el carrito, agregarlo con cantidad 1
-      console.log("hola"+productToAdd.image)
+    } else {
       setCart([...cart, { ...productToAdd, quantity: 1, image: productToAdd.image }]);
-      // setCart([...cart, { ...productToAdd, quantity: 1 }]);
     }
   };
 
@@ -76,22 +70,19 @@ function App() {
     const updatedCart = cart.map(item => {
       if (item.id === productId) {
         if (item.quantity === 1) {
-
           return null;
         } else {
-
           return { ...item, quantity: item.quantity - 1 };
         }
       }
       return item;
-    }).filter(item => item !== null); // Se queda con los distintos
+    }).filter(item => item !== null);
     setCart(updatedCart);
   };
 
   const clearCart = () => {
     setCart([]);
   };
-
 
   return (
     <>
