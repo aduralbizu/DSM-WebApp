@@ -8,8 +8,11 @@ import CartContext from "../Contexts/CartContext";
 const CheckoutForm = (props) => {
 
     const nombreRef = useRef(); //Esta variable va a ser un puntero. Es lo que estamos diciendo.
+    
 
     useEffect(() => {
+        nombreRef.current.focus();
+
         axios.get('https://restcountries.com/v3.1/all')
             .then(response => {
                 // Ordenar la lista de países por nombre común
