@@ -51,9 +51,22 @@ const Header = (props) => {
           <Nav.Item as="li">
             <Link to="/order-history">Historial de pedidos</Link>
           </Nav.Item>
-          {props.login ? (<Nav.Item as="li">
-            <Link onClick={logoutHandler}>Log out</Link>
-          </Nav.Item>) : (<><Nav.Item as="li">
+          {props.login ? (
+            <>
+
+              <Nav.Item as="li">
+                <Link onClick={logoutHandler}>Log out</Link>
+              </Nav.Item>
+
+              <Nav.Item as="li" className="user-info">
+                <span className="user-email">
+                   {props.loginDataEmail}
+                </span>
+              </Nav.Item>
+
+            </>
+
+          ) : (<><Nav.Item as="li">
             <Link to="/login">Login</Link>
           </Nav.Item>
             <Nav.Item as="li">

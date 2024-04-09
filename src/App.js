@@ -30,6 +30,7 @@ function App() {
     localStorage.setItem('login', login);
     localStorage.setItem('loginDataIdToken', loginData.idToken);
     localStorage.setItem('loginDataEmail', loginData.email);
+
   }
 
   useEffect(() => {
@@ -108,7 +109,7 @@ function App() {
     <>
       <CartContext.Provider value={{ addToCart: addToCart, removeFromCart: removeFromCart, clearCart: clearCart }}>
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Header cart={cart} actualizarLogin={actualizarLogin} login={login} />
+          <Header cart={cart} actualizarLogin={actualizarLogin} login={login} loginDataEmail={loginDataEmail} />
 
           <div style={{ flex: '1' }}>
             <Routes>
@@ -119,7 +120,7 @@ function App() {
               <Route path='/about-us' element={<AboutUs />} />
               <Route path='/contact' element={<Contact />} />
               <Route path='/order-history' element={<OrderHistory login={login} loginDataIdToken={loginDataIdToken} loginDataEmail={loginDataEmail} />} />
-              <Route path='/order-details/:id' element={<OrderDetails login={login} />} />
+              <Route path='/order-details/:id' element={<OrderDetails login={login} loginDataEmail={loginDataEmail}/>} />
               <Route path='/login' element={<Login actualizarLogin={actualizarLogin} />} />
               <Route path='/register' element={<Register actualizarLogin={actualizarLogin} />} />
               <Route path='*' element={<ErrorPage />} />

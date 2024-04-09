@@ -49,3 +49,15 @@
     margin-right: 10px; /* Espacio entre el logo y el texto del nombre */
   }
 
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-email {
+    margin-left: 10px;
+    font-weight: bold;
+    font-style: italic; /* Hace que el texto sea cursivo */
+    color: #007bff; /* Color azul claro */
+  }

@@ -86,3 +86,9 @@
 .back-to-orders:hover {
   text-decoration: underline;
 }
+
+.cliente-email {
+  font-weight: bold; /* Hace que el correo electrónico sea más destacado */
+  color: #007bff; /* Color azul para resaltar */
+  font-style: italic; /* Aplica estilo cursivo al texto */
+}

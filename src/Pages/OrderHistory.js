@@ -88,7 +88,10 @@ const OrderHistory = (props) => {
     return (
         <>
             <div className="order-history my-3">
-                <h2>Historial de Pedidos</h2>
+                <h2>Historial de Pedidos
+                    
+                </h2>
+               
                 <div className="filter-section">
                     <label htmlFor="fechaInicio">Desde:</label>
                     <input type="date" id="fechaInicio" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} />
@@ -98,7 +101,7 @@ const OrderHistory = (props) => {
                 </div>
                 {content}
             </div>
-            
+
         </>
     );
 }

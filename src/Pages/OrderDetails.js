@@ -76,6 +76,7 @@ const OrderDetails = (props) => {
                 <ul>
                     <li><strong>Nombre:</strong> {infoCliente.nombre}</li>
                     <li><strong>Apellidos:</strong> {infoCliente.apellidos}</li>
+                    <li><strong>Email:</strong> <span className="cliente-email">{props.loginDataEmail}</span></li>
                     <li><strong>Dirección:</strong> {infoCliente.direccion}</li>
                     <li><strong>Código Postal:</strong> {infoCliente.codigoPostal}</li>
                     <li><strong>Provincia:</strong> {infoCliente.provincia}</li>
