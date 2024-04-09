@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .error-content {
@@ -21,4 +21,9 @@
 
 .error-suggestion {
     font-size: 16px;
+}
+
+.im{
+    font-size: 250px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
