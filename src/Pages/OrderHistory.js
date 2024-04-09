@@ -31,6 +31,11 @@ const OrderHistory = (props) => {
             });
     }, []);
 
+    const renderLocalDate = (utcDate) => {
+        const date = new Date(utcDate);
+        return date.toLocaleString(); // Convertir la fecha a hora local
+    };
+
     const handleDeletePedido = (pedidoId) => {
         if (window.confirm("¿Estás seguro de que quieres eliminar este pedido?")) {
             axios.delete(`https://dsm-webapp-default-rtdb.europe-west1.firebasedatabase.app/historial/${pedidoId}.json?auth=${props.loginDataIdToken}`)
@@ -68,8 +73,7 @@ const OrderHistory = (props) => {
                 <li key={pedidoId} className="order-item">
                     <div className="order-info">
                         <span><strong>Pedido ID:</strong> {pedidoId}</span>
-                        <span><strong>Fecha de pedido:</strong> {pedido.infoCliente.fechaPedido}</span>
-
+                        <span><strong>Fecha de pedido:</strong> {renderLocalDate(pedido.infoCliente.fechaPedido)}</span>
                         <Link to={`/order-details/${pedidoId}`} className="ver-detalles-link">Ver detalles</Link>
                         <Button className="borrar-pedido" onClick={() => handleDeletePedido(pedidoId)}>Eliminar Pedido</Button>
                     </div>
