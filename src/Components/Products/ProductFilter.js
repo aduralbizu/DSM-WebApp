@@ -23,7 +23,7 @@ const ProductFilter = ({ products, setFilteredProducts }) => {
   };
 
   return (
-    <Form className="product-filter">
+    <Form className="product-filter m-2 mt-4">
       <InputGroup>
         <Form.Control
           type="number"

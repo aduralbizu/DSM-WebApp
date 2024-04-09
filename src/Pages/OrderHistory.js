@@ -13,7 +13,8 @@ const OrderHistory = (props) => {
 
     useEffect(() => {
 
-        if (!props.login) {
+        console.log(localStorage.getItem('login'))
+        if (localStorage.getItem('login')=="false") {
             navegar("/login");
         }
 
